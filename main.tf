@@ -33,5 +33,19 @@ output "output-example-2"{
 }
 
 
+resource "azurerm_resource_group" "rg2" {
+  name     = "rg2"
+  location = "West Europe"
+  tags =  {
+    dependency = azurerm_resource_group.example.name
+  }
+}
 
+resource "azurerm_resource_group" "rg3" {
+  name     = "rg3"
+  location = "West Europe"
+  depends_on = [
+    azurerm_resource_group.rg2
+  ]
+}
 
